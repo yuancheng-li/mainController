@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{6272d5ca-dc4c-4994-8ca4-f4ef3072a5c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{894fe195-0bd1-48f4-b14b-d6f70b777a87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external">
+      <UniqueIdentifier>{557e0f59-84cf-4b03-808a-762bd77f8cde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\Eigen">
+      <UniqueIdentifier>{42c59c69-75a0-4bbe-b243-8138cd2e9942}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\rokae">
+      <UniqueIdentifier>{6e475dd2-7438-4782-9e00-888ffae9708f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\lib">
+      <UniqueIdentifier>{3c4bbaa9-430c-4b22-ae35-3930828a5bca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\dll">
+      <UniqueIdentifier>{b85564ac-7908-4005-ba0c-2da55ba25d40}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="robot.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="external\rokae\base.h">
+      <Filter>external\rokae</Filter>
+    </ClInclude>
+    <ClInclude Include="external\rokae\bspline.h">
+      <Filter>external\rokae</Filter>
+    </ClInclude>
+    <ClInclude Include="external\rokae\data_types.h">
+      <Filter>external\rokae</Filter>
+    </ClInclude>
+    <ClInclude Include="external\rokae\exception.h">
+      <Filter>external\rokae</Filter>
+    </ClInclude>
+    <ClInclude Include="external\rokae\model.h">
+      <Filter>external\rokae</Filter>
+    </ClInclude>
+    <ClInclude Include="external\rokae\motion_control_rt.h">
+      <Filter>external\rokae</Filter>
+    </ClInclude>
+    <ClInclude Include="external\rokae\planner.h">
+      <Filter>external\rokae</Filter>
+    </ClInclude>
+    <ClInclude Include="external\rokae\print_helper.hpp">
+      <Filter>external\rokae</Filter>
+    </ClInclude>
+    <ClInclude Include="external\rokae\robot.h">
+      <Filter>external\rokae</Filter>
+    </ClInclude>
+    <ClInclude Include="external\rokae\utility.h">
+      <Filter>external\rokae</Filter>
+    </ClInclude>
+    <ClInclude Include="include\main.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\globaldefine.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\robot.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="external\dll\xCoreSDK.dll">
+      <Filter>external\dll</Filter>
+    </None>
+    <None Include="external\Eigen\AccelerateSupport">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\Cholesky">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\CholmodSupport">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\Core">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\Dense">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\Eigen">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\Eigenvalues">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\Geometry">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\Householder">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\IterativeLinearSolvers">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\Jacobi">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\KLUSupport">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\LU">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\MetisSupport">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\OrderingMethods">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\PardisoSupport">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\PaStiXSupport">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\QR">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\QtAlignedMalloc">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\Sparse">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\SparseCholesky">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\SparseCore">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\SparseLU">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\SparseQR">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\SPQRSupport">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\StdDeque">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\StdList">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\StdVector">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\SuperLUSupport">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\SVD">
+      <Filter>external\Eigen</Filter>
+    </None>
+    <None Include="external\Eigen\UmfPackSupport">
+      <Filter>external\Eigen</Filter>
+    </None>
+  </ItemGroup>
+</Project>
