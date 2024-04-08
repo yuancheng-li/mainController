@@ -27,7 +27,7 @@
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="robot.cpp">
+    <ClCompile Include="src\robot.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

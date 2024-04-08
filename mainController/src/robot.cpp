@@ -2,6 +2,7 @@
 using namespace robot;
 using namespace rokae;
 
+
 robotArm::robotArm()
 {
     m_TStep = 0.001f;
@@ -13,7 +14,6 @@ robotArm::~robotArm()
 {
 
 }
-
 
 void robotArm::connect(const std::string& robotIP, const std::string& controllerIP)
 {
@@ -63,14 +63,6 @@ void robotArm::init()
 
 void robotArm::startCtrl(std::error_code ec)
 {
-    /* 启动机器人，记录数据类型 */
-    robotPtr->setPowerState(true, ec);
-    auto rtCon = robotPtr->getRtMotionController().lock();
-    robotPtr->startReceiveRobotState(std::chrono::milliseconds(1), { RtSupportedFields::jointPos_m, RtSupportedFields::tcpPose_m });
-    
-    /* 初始化核心状态机状态 */
-    m_SM.state = SM_STATE::STOPPED;
-    m_SM.action = SM_ACTION::ENABLE_MOTORS;
     /* 创建运动控制线程 开启核心状态机ctrlStateMachine */
     cout << "Start Control Thread" << endl;
     std::thread ctrlThread([this] {
@@ -79,6 +71,10 @@ void robotArm::startCtrl(std::error_code ec)
 		}
 	});
 
+    /* 初始化核心状态机状态 */
+    rtCon = robotPtr->getRtMotionController().lock();
+    m_SM.state = SM_STATE::STOPPED;
+    m_SM.action = SM_ACTION::POWER_ON;
 }
 
 void robotArm::stopCtrl()
@@ -99,6 +95,66 @@ void robotArm::beginMotion(int motiontype)
 
 void robotArm::ctrlStateMachine()
 {
+    switch (m_SM.state) {
+	case SM_STATE::STOPPED:
+        if (m_SM.action == SM_ACTION::POWER_ON) {
+
+			/* 使能电机 */
+			std::error_code ec;
+            robotPtr->setPowerState(true, ec);
+            if (ec) {
+                print(std::cerr, "使能电机失败: " + ec.message());
+            }
+
+            /* 记录数据类型 */
+            robotPtr->startReceiveRobotState(std::chrono::milliseconds(1), { RtSupportedFields::jointPos_m, RtSupportedFields::tcpPose_m });
+			m_SM.action = SM_ACTION::NONE;
+		}
+
+        if (m_SM.action == SM_ACTION::BEGIN_MOTION) {
+            /* 根据运动类型执行不同的运动 */
+			switch (m_SM.motiontype) 
+            {
+                case MOTION_TYPE::CARTESIAN_S_LINE:
+                {
+					m_CartSLine.onoff = true;
+                    m_CartSLine.firsttime = true;
+                    m_CartSLine.substep = 0;  
+					break;
+				}
+                
+            }
+            m_SM.action = SM_ACTION::NONE;
+            m_SM.state = SM_STATE::RUNNING;
+        }
+		break;
+	case SM_STATE::RUNNING:
+        if (m_SM.action == SM_ACTION::STOP_MOTION)
+        {
+            /* 结束运动，保存数据 */
+		}
+        if (m_CartSLine.onoff) {
+            if (m_CartSLine.substep == 0) {
+				/* 初始化步骤 */
+				m_CartSLine.substep = 1;
+				m_CartSLine.firsttime = false;
+            }
+            else if (m_CartSLine.substep == 1) {
+
+            }
+            else {
+				m_CartSLine.onoff = false;
+                m_CartSLine.substep = 0;
+			}
+        }
+        else {
+            /* 无运动 */
+        }
+		break;
+	default:
+		break;
+	}
+
 
 }
 

@@ -1,12 +1,3 @@
-/**
- * @file cartesian_s_line.cpp
- * @brief 实时模式 - 笛卡尔空间S规划
- *
- * @copyright Copyright (C) 2023 ROKAE (Beijing) Technology Co., LTD. All Rights Reserved.
- * Information in this file is the intellectual property of Rokae Technology Co., Ltd,
- * And may contains trade secrets that must be stored and viewed confidentially.
- */
-
 #include <main.h>
 
 using namespace rokae;

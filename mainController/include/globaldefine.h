@@ -5,7 +5,7 @@
 #define xMateErPro 
 
 #ifdef xMateErPro
-	constexpr auto DoF = 7;
+	constexpr auto m_DoF = 7;
 #endif // xMateErPro
 
 

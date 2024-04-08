@@ -25,30 +25,20 @@ namespace robot
     enum SM_ACTION
     {
         NONE = 0x00,
-        ENABLE_MOTORS = 0x01,
-        DISABLE_MOTORS = 0x02,
+        POWER_ON = 0x01,
+        POWER_OFF = 0x02,
         BEGIN_MOTION = 0x03,
         STOP_MOTION = 0x04
     };
 
     enum MOTION_TYPE
     {
-        JOINT_RML = 0x01,
-        CARTESIAN_RML_6D = 0x03,
-        CARTESIAN_RML_TRANSLATION = 0x04,
-        CARTESIAN_RML_ROTATION = 0x05,
-        TRAJ_OFFLINE = 0x06,
-        CIRCLE = 0x07,
-        TEST_LINE = 0x08,
-        TEST_CIRCLE = 0x09
+        CARTESIAN_S_LINE = 0x01,
+        JOINT_S_LINE = 0x02,
+        CARTESIAN_MODE = 0x03,
+        JOINT_MODE = 0x04,
+        
     };
-
-    struct StateMachine
-    {
-        int action;
-        int state;
-        int motiontype;
-    } m_SM;
 
 
     class robotArm
@@ -60,10 +50,46 @@ namespace robot
 #ifdef xMateErPro
         std::unique_ptr<rokae::xMateErProRobot> robotPtr;
 #endif
-
-        std::shared_ptr<rokae::RtMotionControlCobot<DoF>> rtCon;
+        std::shared_ptr<rokae::RtMotionControlCobot<m_DoF>> rtCon;
         bool m_stopCtrl;
         float m_TStep;
+
+        struct StateMachine
+        {
+            int action;
+            int state;
+            int motiontype;
+        } m_SM;
+
+        struct CartisianSLine
+        {
+            // 控制参数
+            bool onoff;
+            bool firsttime;
+            uint16_t substep;
+
+            // 数据
+            std::array<double, 16> init_pos{}, end_pos{};
+            std::array<double, 7> jntPos{}, delta{};
+            Eigen::Quaterniond rot_cur;
+            Eigen::Matrix3d mat_cur;
+            double delta_s;
+		} m_CartSLine;
+
+        struct JointSLine
+        {
+            // 控制参数
+            bool onoff;
+            bool firsttime;
+            uint16_t substep;
+
+            // 数据
+            std::array<double, 16> init_pos{}, end_pos{};
+            std::array<double, 7> jntPos{}, delta{};
+            Eigen::Quaterniond rot_cur;
+            Eigen::Matrix3d mat_cur;
+            double delta_s;
+        } m_JntSLine;
         
         void connect(const std::string& robotIP, const std::string& controllerIP);
         void init();
@@ -77,6 +103,7 @@ namespace robot
         /* 开始运动,设置运动类型 */
         void beginMotion(int motiontype);
 
+        /* 核心状态机 */
         void ctrlStateMachine();
 
     };
