@@ -77,9 +77,54 @@ void robotArm::startCtrl(std::error_code ec)
     m_SM.action = SM_ACTION::POWER_ON;
 }
 
+void robotArm::WaitRobot() {
+    bool running = true;
+    while (running) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        error_code ec;
+        auto st = robotPtr->operationState(ec);
+        if (st == OperationState::idle || st == OperationState::unknown) {
+            running = false;
+        }
+    }
+}
+
+void robotArm::startCtrl_n(std::error_code ec)
+{
+    ostream& os = std::cout;
+    /* 配置工具、工件坐标系 */
+    auto model = robotPtr->model();
+    // 默认的工具工件 tool0, wobj0
+    auto currentToolset = robotPtr->setToolset("tool0", "wobj0", ec);
+    print(os, "当前工具工件组", currentToolset);
+
+    MoveAbsJCommand moveAbs1({ 0, 0, 0, 0, 0, 0, 0 });
+    MoveAbsJCommand moveAbs2({ 0, M_PI / 6, -M_PI / 2, 0, -M_PI / 3, 0, 0 });
+    robotPtr->executeCommand({ moveAbs1, moveAbs2 }, ec);
+    /*MoveLCommand movel1({ 0.563, 0, 0.432, M_PI, 0, M_PI }, 200, 100);
+    MoveLCommand movel2({ 0.33467, -0.095, 0.51, M_PI, 0, M_PI }, 200, 100);
+    robotPtr->executeCommand({ movel1, movel2 }, ec);*/
+    if (ec) {
+        print(cerr, "执行前错误", ec.message());
+    }
+    else {
+        WaitRobot();
+        ec = robotPtr->lastErrorCode();
+        if (ec) {
+            print(cerr, "运动执行中错误:", robotPtr->lastErrorCode().message());
+        }
+    }
+}
+
 void robotArm::stopCtrl()
 {
     m_stopCtrl = true;
+}
+
+void robotArm::stopCtrl_n(std::error_code ec)
+{
+    robotPtr->setPowerState(false, ec);
+    robotPtr->disconnectFromRobot(ec);
 }
 
 void robotArm::beginMotion(int motiontype)
@@ -154,8 +199,6 @@ void robotArm::ctrlStateMachine()
 	default:
 		break;
 	}
-
-
 }
 
 

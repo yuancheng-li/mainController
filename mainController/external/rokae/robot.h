@@ -442,7 +442,7 @@ namespace rokae {
    * @brief 获取最新的错误码, 目前为运动指令的执行结果
    * @return 错误码,可调用message()获取详细信息
    */
-   [[deprecated("The return might be inaccurate, use queryMoveExecutionInfo() instead.")]]
+   //[[deprecated("The return might be inaccurate, use queryMoveExecutionInfo() instead.")]]
    std::error_code lastErrorCode() noexcept;
 
    // *********************************************************************

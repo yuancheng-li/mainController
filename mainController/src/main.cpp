@@ -42,25 +42,28 @@ int main()
         
         if (cmd == 'Q' || cmd == 'q')
         {
+            m_robot.stopCtrl_n(ec);
             toQuit = true;
             break;
         }
+
+        std::string inputCM;
+        std::string inputIP;
 
         switch (cmd)
         {
             case 'a':
             {
-                std::string inputCM;
-                std::string inputIP;    
                 std::string controllerIP;
 
+                /* 输入控制模式（实时/非实时 */ 
                 cout << std::endl << dashes << std::endl;
                 std::cout << "Input Motion Control Mode:" << std::endl
                     << "'r': RtCommand" << std::endl
                     << "'n': NrtCommand";
                 cout << std::endl << dashes << std::endl;
                 std::cin >> inputCM;
-
+                /* 输入控制器IP */
                 cout << std::endl << dashes << std::endl;
                 std::cout << "input IP of local controller:" << std::endl
                     << "'d': default IP:192.168.0.100" << std::endl
@@ -74,13 +77,18 @@ int main()
                 else {
                     controllerIP = inputIP; // 使用用户输入的 IP
                 }
-                m_robot.connect(robotip, controllerIP);
-                
+                m_robot.connect(robotip, controllerIP);  // 连接机器人
+                m_robot.init();  // 切换到自动模式
+
+                /* 设置运动控制模式 */
                 if (inputCM == "r") {   
                     m_robot.robotPtr->setMotionControlMode(MotionControlMode::RtCommand, ec);
                 }
                 else if (inputCM == "n") {
                     m_robot.robotPtr->setMotionControlMode(MotionControlMode::NrtCommand, ec);
+                    m_robot.robotPtr->moveReset(ec);
+                    m_robot.robotPtr->setDefaultZone(50, ec);
+                    m_robot.robotPtr->setDefaultSpeed(500, ec);
                 }
                 else {
                     cout << "Wrong Input！" << endl;
@@ -90,13 +98,16 @@ int main()
             }
             case 'c':
             {
-                m_robot.startCtrl(ec);
-                break;
-            }
-            
-            case 'q':
+                if (inputCM == "r") {
+                    m_robot.startCtrl(ec);
+                }
+                else if (inputCM == "n") {
+                    m_robot.startCtrl_n(ec);
+                }
                 
                 break;
+            }
+
         }
             
                 

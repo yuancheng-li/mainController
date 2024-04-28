@@ -97,14 +97,23 @@ namespace robot
         /* 创建运动控制线程开启核心状态机 */
         void startCtrl(std::error_code ec);
 
+        /* 非实时运动控制 */
+        void startCtrl_n(std::error_code ec);
+
         /* 停止运动控制线程的状态机循环 */
         void stopCtrl();
+
+        /* 停止非实时控制 */
+        void stopCtrl_n(std::error_code ec);
 
         /* 开始运动,设置运动类型 */
         void beginMotion(int motiontype);
 
         /* 核心状态机 */
         void ctrlStateMachine();
+
+        /* 机器人状态监控 */
+        void WaitRobot();
 
     };
 
