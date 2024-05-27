@@ -19,6 +19,7 @@
 #include "exception.h"
 #include "motion_control_rt.h"
 #include "planner.h"
+#include <corecrt_math_defines.h>
 
 namespace rokae {
 

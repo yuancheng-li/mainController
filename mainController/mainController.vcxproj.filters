@@ -24,10 +24,19 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp">
+    <ClCompile Include="src\mrobot.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\robot.cpp">
+    <ClCompile Include="src\poseGenerate.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\manipulability.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="test\test.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,7 +77,13 @@
     <ClInclude Include="include\globaldefine.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\robot.h">
+    <ClInclude Include="include\mrobot.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\manipulability.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="poseGenerate.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

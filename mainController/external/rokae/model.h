@@ -125,7 +125,7 @@ namespace rokae {
    friction, ///< 摩擦力
    gravity   ///< 重力
  };
-
+#define XMATEMODEL_LIB_SUPPORTED
 #ifdef XMATEMODEL_LIB_SUPPORTED
 
  template <unsigned short DoF>

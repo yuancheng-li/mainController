@@ -137,10 +137,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\robot.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\poseGenerate.cpp" />
+    <ClCompile Include="src\mrobot.cpp" />
+    <ClCompile Include="src\manipulability.cpp" />
+    <ClCompile Include="test\test.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="poseGenerate.h" />
     <ClInclude Include="external\rokae\base.h" />
     <ClInclude Include="external\rokae\bspline.h" />
     <ClInclude Include="external\rokae\data_types.h" />
@@ -153,7 +157,8 @@
     <ClInclude Include="external\rokae\utility.h" />
     <ClInclude Include="include\globaldefine.h" />
     <ClInclude Include="include\main.h" />
-    <ClInclude Include="include\robot.h" />
+    <ClInclude Include="include\mrobot.h" />
+    <ClInclude Include="include\manipulability.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="external\dll\xCoreSDK.dll" />

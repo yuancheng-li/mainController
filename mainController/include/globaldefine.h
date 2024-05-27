@@ -4,6 +4,7 @@
 // 定义机器人类型
 #define xMateErPro 
 
+
 #ifdef xMateErPro
 	constexpr auto m_DoF = 7;
 #endif // xMateErPro
